@@ -1,0 +1,27 @@
+import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+import joblib
+import os
+
+# Create models directory if it doesn't exist
+os.makedirs("models", exist_ok=True)
+
+# Load dataset
+df = pd.read_csv("data/Indian_Startups.csv")
+
+# Features and Target
+X = df[["Founded_Year", "Employees"]]
+y = df["Funding_Amount_Cr"]
+
+# Train Model
+model = RandomForestRegressor(
+    n_estimators=100,
+    random_state=42
+)
+
+model.fit(X, y)
+
+# Save Model
+joblib.dump(model, "models/Indian_Startups.pkl")
+
+print("✅ Model saved successfully as models/Indian_Startups.pkl")
