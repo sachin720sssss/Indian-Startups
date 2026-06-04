@@ -1,0 +1,31 @@
+from PIL import Image, ImageDraw, ImageFont
+
+# Create image
+width, height = 1200, 300
+image = Image.new("RGB", (width, height), color=(20, 40, 80))
+
+draw = ImageDraw.Draw(image)
+
+# Title text
+title = "🚀 Indian Startups Analysis & Prediction"
+
+try:
+    font = ImageFont.truetype("arial.ttf", 60)
+except:
+    font = ImageFont.load_default()
+
+# Position text
+bbox = draw.textbbox((0, 0), title, font=font)
+text_width = bbox[2] - bbox[0]
+text_height = bbox[3] - bbox[1]
+
+x = (width - text_width) // 2
+y = (height - text_height) // 2
+
+# Draw text
+draw.text((x, y), title, fill="white", font=font)
+
+# Save banner
+image.save("assets/banner.png")
+
+print("banner.png created successfully!")
